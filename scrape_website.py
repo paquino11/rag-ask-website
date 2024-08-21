@@ -38,7 +38,6 @@ def scrape(start_url, output_file='output.json', obey_robots_txt=True,
     :param depth_limit: The depth limit for following links.
     """
     
-    # Disable logging to console
     logging.getLogger('scrapy').setLevel(logging.CRITICAL)
 
     process = CrawlerProcess(settings={
@@ -48,7 +47,7 @@ def scrape(start_url, output_file='output.json', obey_robots_txt=True,
                 'overwrite': True
             },
         },
-        'LOG_LEVEL': 'CRITICAL',  # Set to 'ERROR' or 'CRITICAL' to minimize logs
+        'LOG_LEVEL': 'CRITICAL',
         'ROBOTSTXT_OBEY': obey_robots_txt,
         'CONCURRENT_REQUESTS': concurrent_requests,
         'DOWNLOAD_DELAY': download_delay,

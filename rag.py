@@ -41,7 +41,7 @@ def setup_and_run_rag_pipeline(json_path, question, model="gpt-4o-mini", chunk_s
     # store: create embeddings and store them in a vector database
     vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings())
 
-    # Retrieval
+    # retrieval
     retriever = vectorstore.as_retriever()
 
     # Define the system prompt
