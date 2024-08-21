@@ -25,17 +25,11 @@ class WebsiteSpider(scrapy.Spider):
                 yield response.follow(url, self.parse)
 
 
-def scrape(start_url, output_file='output.json', obey_robots_txt=True,
-               concurrent_requests=8, download_delay=1, depth_limit=5):
+def scrape(start_url, output_file='output.json'):
     """
     Run the WebsiteSpider with the given parameters.
 
     :param start_url: The starting URL for the spider.
-    :param output_file: The name of the output file where the scraped data will be saved.
-    :param obey_robots_txt: Whether to obey robots.txt rules.
-    :param concurrent_requests: The number of concurrent requests Scrapy will make.
-    :param download_delay: The delay (in seconds) between requests.
-    :param depth_limit: The depth limit for following links.
     """
     
     logging.getLogger('scrapy').setLevel(logging.CRITICAL)
@@ -48,10 +42,10 @@ def scrape(start_url, output_file='output.json', obey_robots_txt=True,
             },
         },
         'LOG_LEVEL': 'CRITICAL',
-        'ROBOTSTXT_OBEY': obey_robots_txt,
-        'CONCURRENT_REQUESTS': concurrent_requests,
-        'DOWNLOAD_DELAY': download_delay,
-        'DEPTH_LIMIT': depth_limit,
+        'ROBOTSTXT_OBEY': True,
+        'CONCURRENT_REQUESTS': 8,
+        'DOWNLOAD_DELAY': 1,
+        'DEPTH_LIMIT': 5,
     })
 
     process.crawl(WebsiteSpider, start_url=start_url)
